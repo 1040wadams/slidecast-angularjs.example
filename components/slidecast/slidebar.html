@@ -1,0 +1,23 @@
+<div class="navigation">
+    <button data-ng-click="$ctrl.goToFirst()" 
+            data-ng-bind="$ctrl.first">
+    </button>
+    
+    <button data-ng-click="$ctrl.goToPrev()" 
+            data-ng-bind="$ctrl.prev">
+    </button>
+
+    <select data-ng-model="$ctrl.folie" 
+            data-ng-change="$ctrl.goToSelection( $ctrl.folie )"
+            ng-options="slide[1] as slide[0] for slide in $ctrl.slidesdata"
+            >
+    </select>
+    
+    <button data-ng-click="$ctrl.goToNext()" 
+            data-ng-bind="$ctrl.next">
+    </button>
+
+    <button data-ng-click="$ctrl.goToLast()" 
+            data-ng-bind="$ctrl.last">
+    </button>
+</div>

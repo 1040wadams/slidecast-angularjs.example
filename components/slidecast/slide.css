@@ -1,0 +1,22 @@
+
+.main {
+	width: 100%;
+	height: 100%;
+}
+.presentation {
+	width : 100%;
+	height : 80%;
+	border-color : red;
+	border-style : solid;
+	background-color : Azure;
+}
+
+.navigation {
+	width : 100%;
+	height: 5%;
+}
+
+audio {
+	width: 100%;
+	height: 5%;
+}

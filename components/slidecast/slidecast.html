@@ -1,0 +1,37 @@
+
+<div align="center" class="main">
+        
+    <slideview 
+        slidesdata="$ctrl.slidesViewData"
+        titel="{{$ctrl.titel}}" 
+        slide="$ctrl.folie"
+        callback="$ctrl.play( id )"
+    >
+        <div class="presentation">
+
+            <div class="slide" data-ng-repeat="folie in $ctrl.alleFolien" 
+                ng-show="$ctrl.folie == $index"
+                ng-bind-html="folie.innerHTML"
+            >
+            </div>
+
+        </div>
+
+    </slideview>
+
+    <slidebar 
+        slidesdata="$ctrl.slidesNavData"
+        first="'Erste Folie'"
+        prev="'Zurück'"
+        next="'Vorwärts'"
+        last="'Letzte Folie'"
+        on-first="$ctrl.setzeAufErsteFolie()"
+        on-last="$ctrl.setzeAufLetzteFolie()"
+        on-prev="$ctrl.setzeAufVorherigeFolie()"
+        on-next="$ctrl.setzeAufNaechsteFolie()"
+        on-select="$ctrl.setzeAufFolie( folienIndex )"
+        on-change="$ctrl.getCurrentSlide()"
+    >
+    </slidebar>
+
+</div>
