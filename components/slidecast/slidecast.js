@@ -35,6 +35,9 @@
                 this.slidesNavData = getSlidesNavData();
                 this.slidesViewData = getSlidesViewData();
                 this.folie = 0;
+                $scope.$on('slidecast.event', function(event,args){
+                    $scope.$broadcast(args.eventName, args);
+                });
                 $timeout( function(){
                     $scope.$broadcast("slidecast.startAudio", vm.folie);
                 }, 1000);

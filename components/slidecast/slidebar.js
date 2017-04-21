@@ -18,17 +18,24 @@
       onChange: '&'
     },   
     templateUrl: '../components/slidecast/slidebar.html',
-    controller: function SlidebarController() {
-      this.$onInit = function () {
-        this.folie = 0;
-      };
+    controller: function SlidebarController($scope) {
       var vm = this;
-      vm.folie = 0;
       vm.goToFirst = goToFirst;
       vm.goToLast = goToLast;
       vm.goToPrev = goToPrev;
       vm.goToNext = goToNext;
       vm.goToSelection = goToSelection;
+      this.$onInit = function () {
+        vm.folie = 0;
+        vm.disabled = false;
+        $scope.$on('slidecast.bar.enable', function(event,args){
+          vm.disabled = false;
+        });
+        $scope.$on('slidecast.bar.disable', function(event,args){
+          vm.disabled = true;
+        });
+      };
+     
 
 
       function goToFirst() {

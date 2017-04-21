@@ -12,19 +12,22 @@
         },
         transclude: true,
         templateUrl: '../components/slidecast/slideview.html',
-        controller: function SlideviewController( $scope ) {                         
+        controller: function SlideviewController( $scope ) {       
+            var vm = this;
+            vm.started = started;   
+            vm.ended = ended;               
             this.$onInit = function(){
                  $scope.$on( "slidecast.startAudio", function( event, args ){
                    vm.callback( { id: vm.slidesdata[ args ][1] });
                  });
             };
         
-            var vm = this;
-            vm.start = start;
+            function ended(){
+                $scope.$emit('slidecast.event', {eventName: 'slidecast.bar.enable'});
+            }
 
-            function start (){
-                alert('Starte: '+vm.slide);
-                vm.callback( { id: vm.slidesdata[ vm.slide ][1] });
+            function started (){
+               $scope.$emit('slidecast.event', {eventName: 'slidecast.bar.disable'});
             }
 
             vm.getAudioId = function ( slideIndex ){

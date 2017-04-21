@@ -9,6 +9,9 @@
         ng-show="$ctrl.slide == $index"
         controls
     >
+            <!--onended=" $scope.$emit('slidecast.event', {eventName: 'slidecast.bar.disable'})"
+        onplay="$ctrl.started()"-->
+
         <source id="{{$ctrl.getAudioId( $index )+'mp3'}}" 
                 data-ng-src="{{$ctrl.getAudioSrc( $index )}}"           
         >

@@ -1,26 +1,27 @@
 <div class="navigation">
     <button data-ng-click="$ctrl.goToFirst()" 
             data-ng-bind="$ctrl.first"
-            data-ng-disabled="$ctrl.folie <= 0">
+            data-ng-disabled="(($ctrl.folie <= 0) || $ctrl.disabled)">
     </button>
     
     <button data-ng-click="$ctrl.goToPrev()" 
             data-ng-bind="$ctrl.prev"
-              data-ng-disabled="$ctrl.folie <= 0">
+              data-ng-disabled="(($ctrl.folie <= 0) || $ctrl.disabled)">
     </button>
 
     <select data-ng-model="$ctrl.folie" 
             data-ng-change="$ctrl.goToSelection( $ctrl.folie )"
-            ng-options="slide[1] as slide[0] for slide in $ctrl.slidesdata">
+            ng-options="slide[1] as slide[0] for slide in $ctrl.slidesdata"
+            data-ng-disabled="$ctrl.disabled">
     </select>
     
     <button data-ng-click="$ctrl.goToNext()" 
             data-ng-bind="$ctrl.next"
-            data-ng-disabled="($ctrl.folie >= ($ctrl.slidesdata.length-1))">
+            data-ng-disabled="(($ctrl.folie >= ($ctrl.slidesdata.length-1)) || $ctrl.disabled) ">
     </button>
 
     <button data-ng-click="$ctrl.goToLast()" 
             data-ng-bind="$ctrl.last"
-            data-ng-disabled="($ctrl.folie >= ($ctrl.slidesdata.length-1))">
+            data-ng-disabled="(($ctrl.folie >= ($ctrl.slidesdata.length-1)) || $ctrl.disabled)">
     </button>
 </div>
