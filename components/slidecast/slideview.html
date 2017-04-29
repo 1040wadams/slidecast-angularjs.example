@@ -8,7 +8,6 @@
         id='{{$ctrl.getAudioId( $index )}}' 
         ng-show="$ctrl.slide == $index"
         controls
-        event-mapper options="{ play: $ctrl.started, ended: $ctrl.ended }"
     >        
         <source id="{{$ctrl.getAudioId( $index )+'mp3'}}" 
                 data-ng-src="{{$ctrl.getAudioSrc( $index )}}"           

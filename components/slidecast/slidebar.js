@@ -16,50 +16,71 @@
       onNext: '&',
       onSelect: '&',
       onChange: '&'
-    },   
+    },
     templateUrl: '../components/slidecast/slidebar.html',
-    controller: function SlidebarController($scope) {
+    controller: function SlidebarController($scope, $timeout) {
       var vm = this;
       vm.goToFirst = goToFirst;
       vm.goToLast = goToLast;
       vm.goToPrev = goToPrev;
       vm.goToNext = goToNext;
       vm.goToSelection = goToSelection;
+      vm.refresh = refresh;
       this.$onInit = function () {
         vm.folie = 0;
         vm.disabled = false;
-        $scope.$on('slidecast.bar.enable', function(event,args){
-          vm.disabled = false;
-        });
-        $scope.$on('slidecast.bar.disable', function(event,args){
-          vm.disabled = true;
-        });
-      };
-     
 
+        var folienIndex = vm.folie;
+        var audioId = vm.slidesdata[vm.folie][2];
+        var audio = document.getElementById(audioId);
+        audio.onplay = function () {
+          vm.disabled = true;
+          vm.refresh();
+        };
+        audio.onended = function () {
+          vm.disabled = false;
+          vm.refresh();
+        };
+      };
+
+      function refresh() {
+        $timeout(function () {
+          vm.onChange();
+        }, 0);
+      }
 
       function goToFirst() {
-        vm.onFirst();
-        vm.folie = vm.onChange();
+        //if (!vm.disabled) {
+          vm.onFirst();
+          vm.folie = vm.onChange();
+        //}
       }
 
       function goToLast() {
-        vm.onLast();
-        vm.folie = vm.onChange();
+        //if (!vm.disabled) {
+          vm.onLast();
+          vm.folie = vm.onChange();
+        //}
       }
 
       function goToPrev() {
-        vm.onPrev();
-        vm.folie = vm.onChange();
+        //if (!vm.disabled) {
+          vm.onPrev();
+          vm.folie = vm.onChange();
+        //}
       }
 
       function goToNext() {
-        vm.onNext();
-        vm.folie = vm.onChange();
+        //if (!vm.disabled) {
+          vm.onNext();
+          vm.folie = vm.onChange();
+        //}
       }
 
       function goToSelection(nr) {
-        vm.onSelect({ folienIndex: nr });
+        if (!vm.disabled) {
+          vm.onSelect({ folienIndex: nr });
+        }
       }
 
     }

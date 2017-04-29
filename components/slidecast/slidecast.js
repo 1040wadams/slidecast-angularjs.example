@@ -21,7 +21,7 @@
             vm.getSlidesNavData = getSlidesNavData;
             vm.getSlidesViewData = getSlidesNavData;
             vm.getCurrentSlide = getCurrentSlide;
-            vm.starteAudio = starteAudio;
+            vm.initialisiereNeueFolie = initialisiereNeueFolie;
             vm.getLastIndex = getLastIndex;
             vm.setzeAufFolie = setzeAufFolie;
             vm.setzeAufErsteFolie = setzeAufErsteFolie;
@@ -35,24 +35,23 @@
                 this.slidesNavData = getSlidesNavData();
                 this.slidesViewData = getSlidesViewData();
                 this.folie = 0;
+                vm.isBarInactive = [ false ];
                 $scope.$on('slidecast.event', function (event, args) {
                     if (args.args) {
-                        alert(args.eventName + " mit args "+ args);
                         $scope.$broadcast(args.eventName, args.args);
                     } else {
-                        alert(args.eventName + " ohne args ");
                         $scope.$broadcast(args.eventName);
                     }
                 });
-                $timeout(function () {
-                    $scope.$broadcast("slidecast.startAudio", vm.folie);
+                $timeout(function () {                    
+                    vm.initialisiereNeueFolie();
                 }, 1000);
             };
 
             function getSlidesNavData() {
                 var result = [];
                 vm.slides.forEach(function (item) {
-                    result.push([item[0], item[1]]);
+                    result.push([item[0], item[1], item[3]]);
                 });
                 return result;
             }
@@ -65,8 +64,8 @@
                 return result;
             }
 
-            function starteAudio(folienIndex) {
-                $scope.$broadcast("slidecast.startAudio", folienIndex);
+            function initialisiereNeueFolie() {
+                $scope.$broadcast("slidecast.startAudio", vm.folie);
             }
 
             function getCurrentSlide() {
@@ -79,17 +78,17 @@
 
             function setzeAufFolie(folienIndex) {
                 vm.folie = folienIndex;
-                vm.starteAudio(vm.folie);
+                vm.initialisiereNeueFolie();
             }
 
             function setzeAufErsteFolie() {
                 vm.folie = 0;
-                vm.starteAudio(vm.folie);
+                vm.initialisiereNeueFolie();
             }
 
             function setzeAufLetzteFolie() {
                 vm.folie = vm.getLastIndex();
-                vm.starteAudio(vm.folie);
+                vm.initialisiereNeueFolie();
             }
 
             function setzeAufVorherigeFolie() {
@@ -98,7 +97,7 @@
                 if (vm.folie < minIndex) {
                     vm.folie = minIndex;
                 }
-                vm.starteAudio(vm.folie);
+                vm.initialisiereNeueFolie();
             }
 
             function setzeAufNaechsteFolie() {
@@ -107,7 +106,7 @@
                 if (vm.folie > lastIndex) {
                     vm.folie = lastIndex;
                 }
-                vm.starteAudio(vm.folie);
+                vm.initialisiereNeueFolie();
             }
 
         }
