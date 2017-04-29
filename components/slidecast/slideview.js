@@ -13,28 +13,12 @@
         transclude: true,
         templateUrl: '../components/slidecast/slideview.html',
         controller: function SlideviewController($scope) {
-            var vm = this;
-            vm.started = started;
-            vm.ended = ended;
+            var vm = this;           
             this.$onInit = function () {
                 $scope.$on("slidecast.startAudio", function (event, args) {
                     vm.callback({ id: vm.slidesdata[args][1] });
                 });   
             };
-
-            function ended(id) {
-                // if (id === vm.getAudioId(vm.slide)) {
-                //     alert('ended event ' + id);
-                //     $scope.$emit('slidecast.event', { eventName: 'slidecast.bar.enable' });
-                // }
-            }
-
-            function started(id) {
-                // if (id === vm.getAudioId(vm.slide)) {
-                //     alert('startet event ' + id);
-                //     $scope.$emit('slidecast.event', { eventName: 'slidecast.bar.disable' });
-                // }
-            }
 
             vm.getAudioId = function (slideIndex) {
                 return vm.slidesdata[slideIndex][1];
