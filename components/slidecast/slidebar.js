@@ -29,7 +29,10 @@
       this.$onInit = function () {
         vm.folie = 0;
         vm.disabled = false;
+        vm.refresh();
+      };
 
+      function refresh() {
         var folienIndex = vm.folie;
         var audioId = vm.slidesdata[vm.folie][2];
         var audio = document.getElementById(audioId);
@@ -41,9 +44,6 @@
           vm.disabled = false;
           vm.refresh();
         };
-      };
-
-      function refresh() {
         $timeout(function () {
           vm.onChange();
         }, 0);
@@ -51,35 +51,36 @@
 
       function goToFirst() {
         //if (!vm.disabled) {
-          vm.onFirst();
-          vm.folie = vm.onChange();
+        vm.onFirst();
+        vm.folie = vm.onChange();
+        vm.refresh();
         //}
       }
 
       function goToLast() {
         //if (!vm.disabled) {
-          vm.onLast();
-          vm.folie = vm.onChange();
+        vm.onLast();
+        vm.folie = vm.onChange();
+        vm.refresh();
         //}
       }
 
       function goToPrev() {
-        //if (!vm.disabled) {
-          vm.onPrev();
-          vm.folie = vm.onChange();
-        //}
+        vm.onPrev();
+        vm.folie = vm.onChange();
+        vm.refresh();
       }
 
       function goToNext() {
-        //if (!vm.disabled) {
-          vm.onNext();
-          vm.folie = vm.onChange();
-        //}
+        vm.onNext();
+        vm.folie = vm.onChange();
+        vm.refresh();
       }
 
       function goToSelection(nr) {
         if (!vm.disabled) {
           vm.onSelect({ folienIndex: nr });
+          vm.refresh();
         }
       }
 
