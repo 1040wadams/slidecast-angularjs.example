@@ -12,30 +12,36 @@
         },
         transclude: true,
         templateUrl: '../components/slidecast/slideview.html',
-        controller: function SlideviewController( $scope ) {       
+        controller: function SlideviewController($scope) {
             var vm = this;
-            vm.started = started;   
-            vm.ended = ended;               
-            this.$onInit = function(){
-                 $scope.$on( "slidecast.startAudio", function( event, args ){
-                   vm.callback( { id: vm.slidesdata[ args ][1] });
-                 });
+            vm.started = started;
+            vm.ended = ended;
+            this.$onInit = function () {
+                $scope.$on("slidecast.startAudio", function (event, args) {
+                    vm.callback({ id: vm.slidesdata[args][1] });
+                });
             };
-        
-            function ended(){
-                $scope.$emit('slidecast.event', {eventName: 'slidecast.bar.enable'});
+
+            function ended(id) {
+                if (id === vm.getAudioId(vm.slide)) {
+                    alert('ended event ' + id);
+                    $scope.$emit('slidecast.event', { eventName: 'slidecast.bar.enable' });
+                }
             }
 
-            function started (){
-               $scope.$emit('slidecast.event', {eventName: 'slidecast.bar.disable'});
+            function started(id) {
+                if (id === vm.getAudioId(vm.slide)) {
+                    alert('startet event ' + id);
+                    $scope.$emit('slidecast.event', { eventName: 'slidecast.bar.disable' });
+                }
             }
 
-            vm.getAudioId = function ( slideIndex ){
-                return vm.slidesdata[ slideIndex ][1];
+            vm.getAudioId = function (slideIndex) {
+                return vm.slidesdata[slideIndex][1];
             }
 
-            vm.getAudioSrc = function (slideIndex ){
-                return vm.slidesdata[ slideIndex ][2];
+            vm.getAudioSrc = function (slideIndex) {
+                return vm.slidesdata[slideIndex][2];
             }
 
         }

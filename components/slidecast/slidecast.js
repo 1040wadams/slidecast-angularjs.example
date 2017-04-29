@@ -7,7 +7,7 @@
     // <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
     //
 
-    var modul = angular.module('slidecastApp', ['ngSanitize']);
+    var modul = angular.module('slidecastApp', ['ngSanitize', 'eventsApp']);
 
     modul.component('slidecast', {
         bindings: {
@@ -29,16 +29,22 @@
             vm.setzeAufVorherigeFolie = setzeAufVorherigeFolie;
             vm.setzeAufNaechsteFolie = setzeAufNaechsteFolie;
 
-            this.$onInit = function () {               
+            this.$onInit = function () {
                 this.play = $window.Play;
                 this.alleFolien = $window[this.slidesArrayName];
                 this.slidesNavData = getSlidesNavData();
                 this.slidesViewData = getSlidesViewData();
                 this.folie = 0;
-                $scope.$on('slidecast.event', function(event,args){
-                    $scope.$broadcast(args.eventName, args);
+                $scope.$on('slidecast.event', function (event, args) {
+                    if (args.args) {
+                        alert(args.eventName + " mit args "+ args);
+                        $scope.$broadcast(args.eventName, args.args);
+                    } else {
+                        alert(args.eventName + " ohne args ");
+                        $scope.$broadcast(args.eventName);
+                    }
                 });
-                $timeout( function(){
+                $timeout(function () {
                     $scope.$broadcast("slidecast.startAudio", vm.folie);
                 }, 1000);
             };
