@@ -50,19 +50,15 @@
       }
 
       function goToFirst() {
-        //if (!vm.disabled) {
         vm.onFirst();
         vm.folie = vm.onChange();
         vm.refresh();
-        //}
       }
 
       function goToLast() {
-        //if (!vm.disabled) {
         vm.onLast();
         vm.folie = vm.onChange();
         vm.refresh();
-        //}
       }
 
       function goToPrev() {
