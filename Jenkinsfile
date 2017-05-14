@@ -6,9 +6,9 @@ pipeline {
             steps {
                 script{
                     if ( fileExists('target/Jenkinsfile') ){
-                        load 'target/Jenkinsfile'
+                        load '/target/Jenkinsfile'
                     }else{
-                        load 'src/main/scripts/Jenkinsfile'
+                        load '/src/main/scripts/Jenkinsfile'
                     }
                 }
             }
