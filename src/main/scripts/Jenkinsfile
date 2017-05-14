@@ -5,7 +5,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building.. Web App'
+
                 checkout scm
+                
                 script{
                     gem install github_changelog_generator                    
                     github_changelog_generator
