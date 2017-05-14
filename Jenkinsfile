@@ -21,7 +21,9 @@ pipeline {
                 }
             }
             post{
-                echo "Build result:" currentBuild.result
+                failure{
+                    echo "Build result:" currentBuild.result
+                }
             }
         }
         stage('Test') {
