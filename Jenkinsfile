@@ -23,7 +23,9 @@ pipeline {
             post{
                 failure{
                     steps{
-                        echo "Build result:" currentBuild.result
+                        script{
+                            echo "Build result:" currentBuild.result
+                        }
                     }
                 }
             }
