@@ -22,7 +22,9 @@ pipeline {
             }
             post{
                 failure{
-                    echo "Build result:" currentBuild.result
+                    steps{
+                        echo "Build result:" currentBuild.result
+                    }
                 }
             }
         }
