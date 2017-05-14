@@ -3,7 +3,8 @@ pipeline {
 
     stages {
         stage('Lokaler Testbuild'){
-            if ( fileExists '/target/Jenkinsfile' ){
+            def exists = fileExists 'target/Jenkinsfile'
+            if ( exists ){
                 load 'target/Jenkinsfile'
             } 
         }
