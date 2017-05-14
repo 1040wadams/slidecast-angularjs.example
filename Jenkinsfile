@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Load Jenkinsfile'){
             steps {
-                lade:{
+                lade{
                     if ( fileExists('target/Jenkinsfile') ){
                         load 'target/Jenkinsfile'
                     }else{
