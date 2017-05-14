@@ -14,9 +14,11 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building.. Web App'
-                gem install github_changelog_generator
                 checkout scm
-                github_changelog_generator
+                script{
+                    gem install github_changelog_generator                    
+                    github_changelog_generator
+                }
             }
             post{
                 echo "Build result:" currentBuild.result
