@@ -2,42 +2,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Lokaler Testbuild'){
+        stage('Load Jenkinsfile'){
             steps {
                 script{
                     if ( fileExists('target/Jenkinsfile') ){
                         load 'target/Jenkinsfile'
-                    } 
-                }
-            }
-        }
-        stage('Build') {
-            steps {
-                echo 'Building.. Web App'
-                checkout scm
-                script{
-                    gem install github_changelog_generator                    
-                    github_changelog_generator
-                }
-            }
-            post{
-                failure{
-                    steps{
-                        script{
-                            echo "Build result:" currentBuild.result
-                        }
+                    }else{
+                        load 'src/main/scripts/Jenkinsfile'
                     }
                 }
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
             }
         }
     }
