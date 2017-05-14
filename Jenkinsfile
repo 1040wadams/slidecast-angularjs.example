@@ -2,10 +2,15 @@ pipeline {
     agent any
 
     stages {
+        stage('Lokaler Testbuild'){
+            if ( fileExists '/target/Jenkinsfile' ){
+                load 'target/Jenkinsfile'
+            } 
+        }
         stage('Build') {
             steps {
                 echo 'Building.. Web App'
-                sudo gem install github_changelog_generator
+                gem install github_changelog_generator
                 checkout scm
                 github_changelog_generator
             }
