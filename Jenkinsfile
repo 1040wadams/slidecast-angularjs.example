@@ -4,9 +4,11 @@ pipeline {
     stages {
         stage('Lokaler Testbuild'){
             steps {
-                if ( fileExists('target/Jenkinsfile') ){
-                    load 'target/Jenkinsfile'
-                } 
+                script{
+                    if ( fileExists('target/Jenkinsfile') ){
+                        load 'target/Jenkinsfile'
+                    } 
+                }
             }
         }
         stage('Build') {
