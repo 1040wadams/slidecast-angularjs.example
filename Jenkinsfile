@@ -8,7 +8,7 @@ pipeline {
                     if ( fileExists('src/main/scripts/Jenkinsfile') ){
                         load 'src/main/scripts/Jenkinsfile'
                     }else{
-                        scm checkout
+                        echo 'Hier Jenkinsfile checkout out später'
                         load 'src/main/scripts/Jenkinsfile'
                     }
                 }
