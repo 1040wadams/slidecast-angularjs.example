@@ -5,10 +5,11 @@ pipeline {
         stage('Load Jenkinsfile'){
             steps {
                 script{
-                    if ( fileExists('target/Jenkinsfile') ){
-                        load '/target/Jenkinsfile'
+                    if ( fileExists('src/main/scripts/Jenkinsfile') ){
+                        load 'src/main/scripts/Jenkinsfile'
                     }else{
-                        load '/src/main/scripts/Jenkinsfile'
+                        scm checkout
+                        load 'src/main/scripts/Jenkinsfile'
                     }
                 }
             }
